@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>Photo Picker</title>
+</head>
+<body>
+    <header>
+        <div id="header-root"></div>
+    </header>
+    <main>
+        <div id="body-root"></div>
+    </main>
+</body>
+<script src="./dist/Vibrant.min.js"></script>
+<script type="text/babel">
+'use strict'
+
+class PhotoPickerFunc extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            fileURL:null,
+            mainColorCode: null,
+            vibrantCode: null,
+            darkVibrantCode: null,
+            lightVibrantCode: null,
+            darkMutedCode: null,
+            mutedCode: null
+        }
+        this.makeColor = this.makeColor.bind(this)
+        this.buttonAction = this.buttonAction.bind(this)
+    }
+
+    doSubit(e){
+        e.preventDefault()
+    }
+
+    //色取得・ステータス変更
+    makeColor(){
+        if(this.state.fileURL != null && this.state.fileURL.length > 0){
+        const file = this.state.fileURL
+        let img = document.createElement('img')
+        img.setAttribute('src',file)
+        img.onload = () => {
+            let vibrant = new Vibrant(img)
+            const swatches = vibrant.swatches()
+
+            this.setState({
+                vibrantCode: swatches.Vibrant.getHex(),
+                darkVibrantCode: swatches.DarkVibrant.getHex(),
+                lightVibrantCode: swatches.LightVibrant.getHex(),
+                darkMutedCode: swatches.DarkMuted.getHex(),
+                mutedCode: swatches.Muted.getHex()
+            })
+
+            console.log(swatches.Vibrant.getHex())
+            console.log(this.state.vibrantCode)
+            document.getElementById('vib-box').style.background = this.state.vibrantCode
+            document.getElementById('dark-vib-box').style.background = this.state.darkVibrantCode
+            document.getElementById('light-vib-box').style.background = this.state.lightVibrantCode
+            document.getElementById('dark-muted-box').style.background = this.state.darkMutedCode
+            document.getElementById('muted-box').style.background = this.state.mutedCode
+        }
+      }
+
+    }
+
+    //画像URL獲得・色取得関数呼び出し
+    getURL(e){
+        const url = e.target.files
+
+        if(url.length > 0){
+            let file = url[0]
+            let reader = new FileReader()
+
+            reader.onload = (e) =>{
+                this.setState({fileURL:e.target.result})
+                this.makeColor()
+            }
+
+            reader.readAsDataURL(file)
+        }else{
+            this.setState({fileURL:null})
+        }
+    }
+
+    //ボタンイベント・メイン背景色取得
+    buttonAction(e){
+        let setColor = null
+
+        if(e.target.id == 'vib-box'){
+            setColor = this.state.vibrantCode
+        }else if(e.target.id == 'dark-vib-box'){
+            setColor = this.state.darkVibrantCode
+        }else if(e.target.id == 'light-vib-box'){
+            setColor = this.state.lightVibrantCode
+        }else if(e.target.id == 'dark-muted-box'){
+            setColor = this.state.darkMutedCode
+        }else if(e.target.id == 'muted-box'){
+            setColor = this.state.mutedCode
+        }
+
+        this.setState({mainColorCode: setColor})
+        document.getElementById('img-box').style.background = setColor
+    }
+
+    render(){
+        const mainColor = this.state.mainColorCode
+
+        const getURL = (e) => this.getURL(e)
+        const doSubmit = (e) => this.doSubit(e)
+        const buttonAction = (e) => this.buttonAction(e)
+        let imgURL = this.state.fileURL
+        let pre = null
+
+        if(imgURL == null){
+            imgURL = ''
+            pre = <div className='pre'></div>
+        }
+
+
+        return (
+            <div>
+                <div className='sample-board'>
+                    <p className='outline'>写真の特徴的な色を抽出することができるサービスです。<br />あなたの写真がもつ特別な「色」を見つけてみてください</p>
+                    <h2>Sample</h2>
+                    <div className='sample-content'>
+                        <div className='sample1'>
+                            <img src='image/sample1.JPG'/>
+                            <div>
+                                <div className='sample1-circle' id='sample1-vib'></div>
+                                <div className='sample1-circle' id='sample1-dark-vib'></div>
+                                <div className='sample1-circle' id='sample1-light-vib'></div>
+                                <div className='sample1-circle' id='sample1-dark-muted'></div>
+                                <div className='sample1-circle' id='sample1-muted'></div>
+                            </div>
+                        </div>
+                        <div className='sample2'>
+                            <img src='image/sample2.JPG'/>
+                            <div>
+                                <div className='sample2-circle' id='sample2-vib'></div>
+                                <div className='sample2-circle' id='sample2-dark-vib'></div>
+                                <div className='sample2-circle' id='sample2-light-vib'></div>
+                                <div className='sample2-circle' id='sample2-dark-muted'></div>
+                                <div className='sample2-circle' id='sample2-muted'></div>
+                            </div>
+                        </div>
+                        <div className='sample3'>
+                            <img src='image/sample3.JPG'/>
+                            <div>
+                                <div className='sample3-circle' id='sample3-vib'></div>
+                                <div className='sample3-circle' id='sample3-dark-vib'></div>
+                                <div className='sample3-circle' id='sample3-light-vib'></div>
+                                <div className='sample3-circle' id='sample3-dark-muted'></div>
+                                <div className='sample3-circle' id='sample3-muted'></div>
+                            </div>
+                        </div>
+                        <div className='sample4'>
+                            <img src='image/sample4.JPG'/>
+                            <div>
+                                <div className='sample4-circle' id='sample4-vib'></div>
+                                <div className='sample4-circle' id='sample4-dark-vib'></div>
+                                <div className='sample4-circle' id='sample4-light-vib'></div>
+                                <div className='sample4-circle' id='sample4-dark-muted'></div>
+                                <div className='sample4-circle' id='sample4-muted'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div className='main-board'>
+                    <div id='img-box'>
+                        {pre}
+                        <img src={imgURL}/>
+                        <div className="color-button">
+                            <div id='vib-box' onClick={buttonAction}></div>
+                            <div id='dark-vib-box' onClick={buttonAction}></div>
+                            <div id='light-vib-box' onClick={buttonAction}></div>
+                            <div id='dark-muted-box' onClick={buttonAction}></div>
+                            <div id='muted-box' onClick={buttonAction}></div>
+                        </div>
+                    </div>
+                <form className='input-file' onSubmit={doSubmit}>
+                    <input type='file' onChange={getURL} accept='image/*'/>
+                    <p>Color Code：{this.state.mainColorCode}</p>
+                </form>
+            </div>
+            </div>)
+    }
+}
+
+const headID = document.getElementById('header-root')
+const headTitle = <div><h1>Photo Picker</h1></div>
+
+const bodyID = document.getElementById('body-root')
+const photoContent = <div><PhotoPickerFunc /></div>
+
+
+ReactDOM.render(headTitle,headID)
+ReactDOM.render(photoContent,bodyID)
+</script>
+</html>

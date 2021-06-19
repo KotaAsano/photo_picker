@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+
+
+body{
+    margin: 0;
+}
+
+h1{
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    color: #dcf4ff;
+    background: linear-gradient(to right,#01082e,#49addb);
+    background: -moz-linear-gradient(left, #01082e, #49addb);
+    background: -webkit-linear-gradient(left, #01082e, #49addb);
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.outline{
+    margin: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+h2{
+    display: flex;
+    width: 40%;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: center;
+    border-top: 2px #49addb solid;
+    border-bottom: 2px #49addb solid;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+#body-root{
+    background: #e2e4e7;
+}
+
+.main-board{
+    width: 70%;
+    min-width: 300px;
+    margin: 0 auto;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px 5px #c3c4c7;
+}
+
+#img-box{
+    display: flex;
+    width: 100%;
+    min-width: 300px;
+    height: auto;
+    margin-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+#vib-box, #dark-vib-box, #light-vib-box, #dark-muted-box, #muted-box{
+    width: 50px;
+    height: 50px;
+    margin: 20px;
+    background-color: black;
+    box-shadow: 0px 0px 5px 0.5px #8b8a8a;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.input-file{
+    display: flex;
+    width: 100%;
+    height: 20%;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #dcf4ff;
+    background: linear-gradient(to right,#01082e,#49addb);
+    background: -moz-linear-gradient(left, #01082e, #49addb);
+    background: -webkit-linear-gradient(left, #01082e, #49addb);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    font-weight: bold;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+img{
+    max-width: 500px;
+    max-height: 400px;
+}
+
+.pre{
+    width:70%;
+}
+
+.sample-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sample-content img{
+    width:65%
+}
+
+.sample1, .sample2, .sample3, .sample4{
+    display: flex;
+    width: 35%;
+    height: auto;
+    margin: 20px 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px 0.5px #8b8a8a;
+}
+
+.sample1-circle, .sample2-circle, .sample3-circle, .sample4-circle{
+    width: 30px;
+    height: 30px;
+    margin: 15px;
+    box-shadow: 0px 0px 5px 0.5px #8b8a8a;
+    border-radius: 50%;
+}
+
+
+.sample1{
+    background: #c6ac83;
+}
+
+#sample1-vib{
+    background: #c22018;
+}
+
+#sample1-dark-vib{
+    background: #6f2f2a;
+}
+
+#sample1-light-vib{
+    background: #e5dfb3;
+}
+
+#sample1-dark-muted{
+    background: #736e37;
+}
+
+#sample1-muted{
+    background: #c6ac83;
+}
+
+.sample2{
+    background: #7c9b34;
+}
+
+#sample2-vib{
+    background: #cfbc90;
+}
+
+#sample2-dark-vib{
+    background: #7c9b34;
+}
+
+#sample2-light-vib{
+    background: #a9c461;
+}
+
+#sample2-dark-muted{
+    background: #35321b;
+}
+
+#sample2-muted{
+    background: #a39883;
+}
+
+.sample3{
+    background: #4376c8;
+}
+
+#sample3-vib{
+    background: #4376c8;
+}
+
+#sample3-dark-vib{
+    background: #4e3225;
+}
+
+#sample3-light-vib{
+    background: #5f93dc;
+}
+
+#sample3-dark-muted{
+    background: #1a191a;
+}
+
+#sample3-muted{
+    background: #8c6f6a;
+}
+
+.sample4{
+    background: #f15768;
+}
+
+#sample4-vib{
+    background: #c49f20;
+}
+
+#sample4-dark-vib{
+    background: #514f26;
+}
+
+#sample4-light-vib{
+    background: #f15768;
+}
+
+#sample4-dark-muted{
+    background: #876b51;
+}
+
+#sample4-muted{
+    background: #b39d8d;
+}
